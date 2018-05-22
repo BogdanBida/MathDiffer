@@ -1,8 +1,15 @@
 package mathdiffer;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import org.python.core.PyObject;
+import org.python.core.PyString;
+import org.python.util.PythonInterpreter;
+
 public class Calculation {
+
     private static final double EPS = 0.0001;
-    
+
     public static double get(double a, double b, String formula) {
         double result = 0;
         double I = EPS + 1, I1 = 0; //I-предыдущее вычисленное значение интеграла, I1-новое, с большим N.
@@ -18,27 +25,25 @@ public class Calculation {
             I = I1;
             I1 = (h / 3) * sum;
         }
-        
+
         return I1;
     }
-    
+
     private static double f(double x, String form) {
         String line = form.replaceAll("x", String.valueOf(x));
         line = line.replaceAll(" ", "");
         line = line.replaceAll("^", "**");
-        /*
-            def getEval(formula):
-                try:
-                    res = eval(t)
-                except ValueError as err:
-                    print(err)
-            return res
-            
-            код для питона который нужно вызвать ниже
-        */
-        
-        // return getEval(line); вернуть результат питонской функции
-        return x*x + 3*x; // стереть эту строку
+
+        PythonInterpreter interpreter = new PythonInterpreter();
+        try {
+            interpreter.execfile(new FileInputStream("src/mathdiffer/python.py"));
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        PyObject object = interpreter.get("getEval");
+        PyObject result = object.__call__(new PyString(line));
+
+        return (double) result.__tojava__(Double.class);
     }
-    
+
 }
