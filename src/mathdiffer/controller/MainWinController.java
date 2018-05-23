@@ -44,7 +44,7 @@ public class MainWinController implements Initializable {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Ответ");
         alert.setHeaderText(field_form.getText());
-        alert.setContentText(String.valueOf(Calculation.get(Double.valueOf(field_a.getText()), Double.valueOf(field_b.getText()), field_form.getText())));
+        alert.setContentText(Calculation.get(Double.valueOf(field_a.getText()), Double.valueOf(field_b.getText()), field_form.getText()));
         alert.show();
     }
 
@@ -67,5 +67,4 @@ public class MainWinController implements Initializable {
         } catch (IOException iOException) {
         }
     }
-    
 }

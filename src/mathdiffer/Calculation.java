@@ -6,23 +6,27 @@ import javax.script.ScriptException;
 
 public strictfp class Calculation {
 
-    private static final double EPS = 0.0001;
-    private static final double n = 100;
+    private static final double EPS = 3;
+    private static final double N = 100;
 
-    public static double get(double b, double a, String formula) {
+    public static String get(double b, double a, String formula) {
         double x, h, s;
-        h = (b - a) / n;
-        s = 0;
-        x = a + h;
-        while (x < b) {
-            s = s + 4 * f(x, formula);
-            x = x + h;
-            s = s + 2 * f(x, formula);
-            x = x + h;
+        try {
+            h = (b - a) / N;
+            s = 0;
+            x = a + h;
+            while (x < b) {
+                s = s + 4 * f(x, formula);
+                x = x + h;
+                s = s + 2 * f(x, formula);
+                x = x + h;
+            }
+            s = h / 3 * (s + f(a, formula) - f(b, formula));
+        } catch (ArithmeticException exeption) {
+            return "Ошибка в записи выражения";
         }
-        s = h / 3 * (s + f(a, formula) - f(b, formula));
-
-        return s;
+        int eps = (int) Math.pow(10, EPS);
+        return String.valueOf((double) Math.round(s * eps) / eps);
     }
 
     public static double f(double x, String form) {
@@ -38,15 +42,14 @@ public strictfp class Calculation {
         return eval(line);
     }
 
-    private static double eval(String form) {
-        ScriptEngineManager mgr = new ScriptEngineManager();
-        ScriptEngine engine = mgr.getEngineByName("JavaScript");
+    private static final ScriptEngine ENGINE = new ScriptEngineManager().getEngineByName("JavaScript");
+
+    private static double eval(String form) throws ArithmeticException {
         try {
-            Object s2 = engine.eval(form);
+            Object s2 = ENGINE.eval(form);
             return Double.valueOf(s2.toString());
         } catch (ScriptException e1) {
-            e1.printStackTrace();
-            return 0;
+            throw new ArithmeticException();
         }
     }
 
