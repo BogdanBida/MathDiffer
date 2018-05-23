@@ -34,11 +34,18 @@ public strictfp class Calculation {
         line = line.replaceAll(" ", "");
         line = line.replaceAll("pi", String.valueOf(Math.PI));
         line = line.replaceAll("e", String.valueOf(Math.E));
-        // replace 'x^3' on 'x*x*x'
+        // replace 'x^3' on 'x*x*x'  x^n 
         line = line.replaceAll("x", String.valueOf(x));
-        // replace sin(3*3+4*3) on Math.sin(21) ...s
+        line = line.replaceAll("sin[(]", "Math.sin(");
+        line = line.replaceAll("cos[(]", "Math.cos(");
+        line = line.replaceAll("tan[(]", "Math.tan(");
+        line = line.replaceAll("exp[(]", "Math.exp(");
+        line = line.replaceAll("log[(]", "Math.log(");
+        line = line.replaceAll("log10[(]", "Math.log10(");
+        line = line.replaceAll("log2[(]", "Math.log2(");
         // replace log(4) on Math.log(4) ...
         // ...
+        
         return eval(line);
     }
 
