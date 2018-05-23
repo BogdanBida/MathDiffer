@@ -34,7 +34,7 @@ public strictfp class Calculation {
         line = line.replaceAll(" ", "");
         line = line.replaceAll("pi", String.valueOf(Math.PI));
         line = line.replaceAll("e", String.valueOf(Math.E));
-        // replace 'x^3' on 'x*x*x'  x^n 
+        // replace 'x^3' on 'x*x*x'
         line = line.replaceAll("x", String.valueOf(x));
         line = line.replaceAll("sin[(]", "Math.sin(");
         line = line.replaceAll("cos[(]", "Math.cos(");

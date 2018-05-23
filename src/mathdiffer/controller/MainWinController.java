@@ -12,7 +12,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import mathdiffer.Calculation;
 import mathdiffer.MathDiffer;
@@ -27,18 +30,21 @@ public class MainWinController implements Initializable {
 
     @FXML
     private TextField field_form;
-    
+
     @FXML
     private Button btn_enter;
-    
+
     @FXML
     private Button btn_settings;
 
+    @FXML
+    private Button manual_btn;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
     }
-    
+
     @FXML
     private void show_result(ActionEvent event) {
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -53,15 +59,30 @@ public class MainWinController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(MathDiffer.class.getResource("fxml/MainWin.fxml"));
             Parent root = loader.load();
-            
+
             Scene scene = new Scene(root);
             Stage stage = new Stage();
-            
+
             stage.setResizable(false);
-            
+
             SettingsWinController controller = loader.getController();
             // do something 
-            
+
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException iOException) {
+        }
+    }
+
+    @FXML
+    private void show_manual(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/ManualWindow.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Справка");
+            stage.setResizable(true);
+            stage.initModality(Modality.NONE);
             stage.setScene(scene);
             stage.show();
         } catch (IOException iOException) {
