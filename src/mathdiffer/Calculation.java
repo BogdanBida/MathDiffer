@@ -43,7 +43,10 @@ public strictfp class Calculation {
         line = line.replaceAll("log[(]", "Math.log(");
         line = line.replaceAll("log10[(]", "Math.log10(");
         line = line.replaceAll("log2[(]", "Math.log2(");
-        // replace log(4) on Math.log(4) ...
+        line = line.replaceAll("pow[(]", "Math.pow(");
+        line = line.replaceAll("sign[(]", "Math.sign(");
+        line = line.replaceAll("sqrt[(]", "Math.sqrt(");
+        line = line.replaceAll("abs[(]", "Math.abs(");
         // ...
         
         return eval(line);
