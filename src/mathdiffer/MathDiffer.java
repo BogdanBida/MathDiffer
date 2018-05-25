@@ -10,7 +10,7 @@ public class MathDiffer extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/MainWin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/ManualWindow.fxml"));
         
         Scene scene = new Scene(root);
 

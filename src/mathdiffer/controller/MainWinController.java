@@ -39,7 +39,6 @@ public class MainWinController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
     }
 
     @FXML
@@ -52,7 +51,7 @@ public class MainWinController implements Initializable {
         a = String.valueOf(Calculation.f(0, a));
         b = String.valueOf(Calculation.f(0, b));
         alert.setContentText(Calculation.get(Double.valueOf(a), Double.valueOf(b), field_form.getText()));
-        alert.show();
+        show_manual();
     }
 
     @FXML
@@ -75,8 +74,7 @@ public class MainWinController implements Initializable {
         }
     }
 
-    @FXML
-    private void show_manual(ActionEvent event) {
+    public void show_manual() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/ManualWindow.fxml"));
             Scene scene = new Scene(root);

@@ -56,7 +56,6 @@ public strictfp class Calculation {
     private static String toFraction(double val) {
         String res;
         final double ratio = Math.pow(10, -1);
-        System.out.println(ratio);
         for (int i = 1; true; i++) {
             double tem = val / (1f / i);
             if (Math.abs(tem - Math.round(tem)) <= ratio) {
