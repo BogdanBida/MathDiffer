@@ -51,11 +51,6 @@ public class MainWinController implements Initializable {
         String b = field_b.getText();
         a = String.valueOf(Calculation.f(0, a));
         b = String.valueOf(Calculation.f(0, b));
-//        a = a.replace("pi", String.valueOf(Math.PI));
-//        b = b.replace("pi", String.valueOf(Math.PI));
-//        a = a.replace("e", String.valueOf(Math.E));
-//        b = b.replace("e", String.valueOf(Math.E));
-        System.out.println(a + " " + b);
         alert.setContentText(Calculation.get(Double.valueOf(a), Double.valueOf(b), field_form.getText()));
         alert.show();
     }

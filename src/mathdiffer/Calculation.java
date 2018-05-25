@@ -6,7 +6,7 @@ import javax.script.ScriptException;
 
 public strictfp class Calculation {
 
-    private static final double EPS = 3;
+    private static final double EPS = 8;
     private static final double N = 100;
 
     public static String get(double b, double a, String formula) {
@@ -26,9 +26,10 @@ public strictfp class Calculation {
             return "Ошибка в записи выражения";
         }
         int eps = (int) Math.pow(10, EPS);
-        return String.valueOf((double) Math.round(s * eps) / eps);
+        double result = (double) Math.round(s * eps) / eps;
+        return String.valueOf(result) + "\n\n" + toFraction(result) ;
     }
-
+    
     public static double f(double x, String form) {
         String line = form;
         line = line.replaceAll(" ", "");
@@ -49,6 +50,20 @@ public strictfp class Calculation {
         return eval(line);
     }
 
+    private static String toFraction(double val) {
+        String res;
+        final double ratio = Math.pow(10, -1);
+        System.out.println(ratio);
+        for (int i = 1; true; i++) {
+            double tem = val / (1f / i);
+            if (Math.abs(tem - Math.round(tem)) <= ratio) {
+                res = String.valueOf(Math.round(tem)) + "/" + i;
+                break;
+            }
+        }
+        return res.toString();
+    }
+    
     private static final ScriptEngine ENGINE = new ScriptEngineManager().getEngineByName("JavaScript");
 
     private static double eval(String form) throws ArithmeticException {
