@@ -13,7 +13,7 @@ public class MathDiffer extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/MainWin.fxml"));
         
         Scene scene = new Scene(root);
-
+        
         stage.setResizable(false);
         
         stage.setScene(scene);

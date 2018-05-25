@@ -98,7 +98,7 @@ public class MainWinController implements Initializable {
     }
 
     @FXML
-    private void show_result(ActionEvent event) {
+    public void show_result() {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Ответ");
         alert.setHeaderText(field_form.getText());
