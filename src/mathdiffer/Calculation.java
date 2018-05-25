@@ -1,49 +1,80 @@
 package mathdiffer;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import org.python.core.PyObject;
-import org.python.core.PyString;
-import org.python.util.PythonInterpreter;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
-public class Calculation {
+public strictfp class Calculation {
 
-    private static final double EPS = 0.0001;
+    private static final double EPS = 8;
+    private static final double N = 100;
 
-    public static double get(double a, double b, String formula) {
-        double result = 0;
-        double I = EPS + 1, I1 = 0; //I-предыдущее вычисленное значение интеграла, I1-новое, с большим N.
-
-        for (int N = 2; (N <= 4) || (Math.abs(I1 - I) > EPS); N *= 2) {
-            double h, sum2 = 0, sum4 = 0, sum = 0;
-            h = (b - a) / (2 * N);  //Шаг интегрирования.
-            for (int i = 1; i <= 2 * N - 1; i += 2) {
-                sum4 += f(a + h * i, formula);  //Значения с нечётными индексами, которые нужно умножить на 4.
-                sum2 += f(a + h * (i + 1), formula);    //Значения с чётными индексами, которые нужно умножить на 2.
+    public static String get(double b, double a, String formula) {
+        double x, h, s;
+        try {
+            h = (b - a) / N;
+            s = 0;
+            x = a + h;
+            while (x < b) {
+                s = s + 4 * f(x, formula);
+                x = x + h;
+                s = s + 2 * f(x, formula);
+                x = x + h;
             }
-            sum = f(a, formula) + 4 * sum4 + 2 * sum2 - f(b, formula);  //Отнимаем значение f(b) так как ранее прибавили его дважды. 
-            I = I1;
-            I1 = (h / 3) * sum;
+            s = h / 3 * (s + f(a, formula) - f(b, formula));
+        } catch (ArithmeticException exeption) {
+            return "Ошибка в записи выражения";
         }
-
-        return I1;
+        int eps = (int) Math.pow(10, EPS);
+        double result = (double) Math.round(s * eps) / eps;
+        return String.valueOf(result) + "\n\n" + toFraction(result) ;
+    }
+    
+    public static double f(double x, String form) {
+        String line = form;
+        line = line.replaceAll(" ", "");
+        line = line.replaceAll("pi", String.valueOf(Math.PI));
+        line = line.replaceAll("e", String.valueOf(Math.E));
+        line = line.replaceAll("x", String.valueOf(x));
+        line = line.replaceAll("sin[(]", "Math.sin(");
+        line = line.replaceAll("cos[(]", "Math.cos(");
+        line = line.replaceAll("tan[(]", "Math.tan(");
+        line = line.replaceAll("asin[(]", "Math.asin(");
+        line = line.replaceAll("acos[(]", "Math.acos(");
+        line = line.replaceAll("atan[(]", "Math.atan(");
+        line = line.replaceAll("exp[(]", "Math.exp(");
+        line = line.replaceAll("log[(]", "Math.log(");
+        line = line.replaceAll("log10[(]", "Math.log10(");
+        line = line.replaceAll("log2[(]", "Math.log2(");
+        line = line.replaceAll("pow[(]", "Math.pow(");
+        line = line.replaceAll("sign[(]", "Math.sign(");
+        line = line.replaceAll("sqrt[(]", "Math.sqrt(");
+        line = line.replaceAll("abs[(]", "Math.abs(");
+        return eval(line);
     }
 
-    private static double f(double x, String form) {
-        String line = form.replaceAll("x", String.valueOf(x));
-        line = line.replaceAll(" ", "");
-        line = line.replaceAll("^", "**");
-
-        PythonInterpreter interpreter = new PythonInterpreter();
-        try {
-            interpreter.execfile(new FileInputStream("src/mathdiffer/python.py"));
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
+    private static String toFraction(double val) {
+        String res;
+        final double ratio = Math.pow(10, -1);
+        for (int i = 1; true; i++) {
+            double tem = val / (1f / i);
+            if (Math.abs(tem - Math.round(tem)) <= ratio) {
+                res = String.valueOf(Math.round(tem)) + "/" + i;
+                break;
+            }
         }
-        PyObject object = interpreter.get("getEval");
-        PyObject result = object.__call__(new PyString(line));
+        return res.toString();
+    }
+    
+    private static final ScriptEngine ENGINE = new ScriptEngineManager().getEngineByName("JavaScript");
 
-        return (double) result.__tojava__(Double.class);
+    private static double eval(String form) throws ArithmeticException {
+        try {
+            Object s2 = ENGINE.eval(form);
+            return Double.valueOf(s2.toString());
+        } catch (ScriptException e1) {
+            throw new ArithmeticException();
+        }
     }
 
 }
