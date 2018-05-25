@@ -63,7 +63,7 @@ public strictfp class Calculation {
                 break;
             }
         }
-        return res.toString();
+        return res;
     }
     
     private static final ScriptEngine ENGINE = new ScriptEngineManager().getEngineByName("JavaScript");
