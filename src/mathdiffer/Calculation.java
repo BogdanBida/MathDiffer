@@ -39,6 +39,9 @@ public strictfp class Calculation {
         line = line.replaceAll("sin[(]", "Math.sin(");
         line = line.replaceAll("cos[(]", "Math.cos(");
         line = line.replaceAll("tan[(]", "Math.tan(");
+        line = line.replaceAll("asin[(]", "Math.asin(");
+        line = line.replaceAll("acos[(]", "Math.acos(");
+        line = line.replaceAll("atan[(]", "Math.atan(");
         line = line.replaceAll("exp[(]", "Math.exp(");
         line = line.replaceAll("log[(]", "Math.log(");
         line = line.replaceAll("log10[(]", "Math.log10(");
