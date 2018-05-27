@@ -134,7 +134,7 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TextField layoutX="14.0" layoutY="167.0" prefHeight="31.0" prefWidth="304.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" />
-                        <LineChart layoutX="4.0" layoutY="-200.0" prefHeight="151.0" prefWidth="497.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0">
+                        <LineChart fx:id="mainChart" layoutX="4.0" layoutY="-200.0" prefHeight="151.0" prefWidth="497.0" title="()'" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>

@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -58,6 +59,9 @@ public class MainWinController implements Initializable {
 
     @FXML
     private Slider sl_N;
+
+    @FXML
+    private LineChart mainChart;
 
     BooleanProperty property = new SimpleBooleanProperty(true);
 
@@ -119,7 +123,7 @@ public class MainWinController implements Initializable {
     }
 
     public void initializeDiffer() {
-        double a,b,y0;
+        double a, b, y0;
         a = -2;
         b = 8;
         y0 = 0;
