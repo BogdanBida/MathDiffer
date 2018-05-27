@@ -119,7 +119,15 @@ public class MainWinController implements Initializable {
     }
 
     public void initializeDiffer() {
-        DifferCalc.get("3*sin(2*y)+x", 0, 10, 2);
+        double a,b,y0;
+        a = -2;
+        b = 8;
+        y0 = 0;
+        String form = "3*sin(2*y)+x";
+        double[][] result = DifferCalc.get(form, a, b, y0);
+        for (int i = 0; i < result[0].length; i++) {
+            System.out.println("X:" + result[0][i] + " Y = " + result[1][i]);
+        }
     }
 
     @FXML

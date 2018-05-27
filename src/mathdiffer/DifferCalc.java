@@ -7,7 +7,7 @@ public class DifferCalc {
     private static final float EPS = 0.001f;
     private static final float H = 1;
 
-    public static void get(String form, double a, double b, double y0) {
+    public static double[][] get(String form, double a, double b, double y0) {
         double n = (b - a) / H;
         double[] X = new double[(int) n + 1];
         double[] Y1 = new double[(int) n + 1];
@@ -22,12 +22,14 @@ public class DifferCalc {
         }
         //print results
         for (int i = 0; i <= n; i++) {
-            System.out.print("X[" + i + "]=" + X[i] + " \n");
+          //  System.out.print("X[" + i + "]=" + X[i] + " \n");
         }
         System.out.println("\n");
         for (int i = 0; i <= n; i++) {
-            System.out.print("Y[" + i + "]=" + Y[i] + " \n");
+         //   System.out.print("Y[" + i + "]=" + Y[i] + " \n");
         }
+        double[][] Res = {X,Y}; 
+        return Res;
     }
 
     private static double f(double x, double y, String form) {
