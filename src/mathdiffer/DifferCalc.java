@@ -4,34 +4,37 @@ import mathdiffer.Calculation;
 
 public class DifferCalc {
 
-    private static final float EPS = 0.01f;
-    private static final float N = 1;
+    private static final float EPS = 0.001f;
+    private static final float H = 1;
 
-    public static double[] get(String form, double a, double b, double y0) {
-        int range = (int) Math.abs(a - b);
-        double[] result = new double[range];
-        double k1, k2, k3, k4;
-        double x = a;
-        double yn = y0;
-        double h = 1;
-        for (int i = 0; x <= b; i++) {
-            k1 = f(x, yn, form);
-            k2 = f(x + h / 2, yn + (h * k1) / 2, form);
-            k3 = f(x + h / 2, yn + (h * k2) / 2, form);
-            k4 = f(x + h, yn + h * k3, form);
-            yn = yn + h / 6 * (k1 + k2 + k3 + k4);
-            result[i] = yn;
-            x += h;
+    public static void get(String form, double a, double b, double y0) {
+        double n = (b - a) / H;
+        double[] X = new double[(int) n + 1];
+        double[] Y1 = new double[(int) n + 1];
+        double[] Y = new double[(int) n + 1];
+        //calculate
+        X[0] = a;
+        Y[0] = y0;
+        for (int i = 1; i <= n; i++) {
+            X[i] = a + i * H;
+            Y1[i] = Y[i - 1] + H * f(X[i - 1], Y[i - 1], form);
+            Y[i] = Y[i - 1] + H * (f(X[i - 1], Y[i - 1], form) + f(X[i], Y1[i], form)) / 2.0;
         }
-
-        return result;
+        //print results
+        for (int i = 0; i <= n; i++) {
+            System.out.print("X[" + i + "]=" + X[i] + " \n");
+        }
+        System.out.println("\n");
+        for (int i = 0; i <= n; i++) {
+            System.out.print("Y[" + i + "]=" + Y[i] + " \n");
+        }
     }
 
     private static double f(double x, double y, String form) {
         String res;
         res = form.replaceAll("x", String.valueOf(x));
         res = res.replaceAll("y", String.valueOf(y));
-        return Calculation.eval(res);
+        return Calculation.eval(Calculation.processingStr(res));
     }
 
 }
