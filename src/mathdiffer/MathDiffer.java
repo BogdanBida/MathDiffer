@@ -1,4 +1,4 @@
-package mathdiffer;
+ package mathdiffer;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

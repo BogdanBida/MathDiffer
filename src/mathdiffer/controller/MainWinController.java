@@ -117,9 +117,12 @@ public class MainWinController implements Initializable {
         btn_enter.disableProperty().bind(field_form.disableProperty());
 
     }
-    
+
     public void initializeDiffer() {
-        double[] test = DifferCalc.get("", -3, 5);
+        double[] test = DifferCalc.get("x*x + 3*y", 0, 5, 1);
+        for (int i = 0; i < 5; i++) {
+            System.out.print(test[i] + " ");
+        }
     }
 
     @FXML

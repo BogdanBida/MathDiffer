@@ -31,7 +31,7 @@ public strictfp class Calculation {
         return String.valueOf(result) + "\n\n" + toFraction(result) ;
     }
     
-    private static String processingStr(String form) {
+    public static String processingStr(String form) {
         String line = form;
         line = line.replaceAll(" ", "");
         line = line.replaceAll("pi", String.valueOf(Math.PI));
@@ -58,7 +58,7 @@ public strictfp class Calculation {
         return eval(processingStr(form));
     }
 
-    private static double eval(String form) throws ArithmeticException {
+    public static double eval(String form) throws ArithmeticException {
         try {
             Object s2 = ENGINE.eval(form);
             return Double.valueOf(s2.toString());
