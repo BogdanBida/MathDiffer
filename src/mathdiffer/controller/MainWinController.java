@@ -2,8 +2,6 @@ package mathdiffer.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -28,7 +26,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 import mathdiffer.Calculation;
 import mathdiffer.MathDiffer;
 
@@ -149,26 +146,15 @@ public class MainWinController implements Initializable {
         AnchorPane.setLeftAnchor(diff_chart, 5.0);
         AnchorPane.setRightAnchor(diff_chart, 5.0);
         AnchorPane.setBottomAnchor(diff_chart, 35.0);
-
-        ArrayList<Pair<Double, Double>> list = new ArrayList<>();
-        Random random = new Random();
-        for (int i = 0; i < 10; i++) {
-            list.add(new Pair<>(random.nextInt(40) + 10.0, random.nextInt(40) + 10.0));
-        }
-        buildLine(list);
-        //        diff_chart.getXAxis().set
-        //        double[] test = DifferCalc.get("x*x + 3*y", 0, 5, 1);
-        //        for (int i = 0; i < 5; i++) {
-        //            System.out.print(test[i] + " ");
-        //        }
     }
 
-    private void buildLine(ArrayList<Pair<Double, Double>> list) {
+    private void buildLine(Double[][] list) {
         XYChart.Series<Double, Double> line = new XYChart.Series<>();
 
-        list.forEach((pair) -> {
-            line.getData().add(new XYChart.Data<>(pair.getKey(), pair.getValue()));
-        });
+        for (Double[] arr : list) {
+            line.getData().add(new XYChart.Data<>(arr[0], arr[1]));
+        }
+
         line.setName("Test");
         diff_chart.getData().add(line);
     }
