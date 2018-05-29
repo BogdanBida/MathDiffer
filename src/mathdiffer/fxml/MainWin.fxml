@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.input.*?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="387.0" prefWidth="564.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mathdiffer.controller.MainWinController">
+<AnchorPane prefHeight="350.0" prefWidth="564.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mathdiffer.controller.MainWinController">
    <children>
       <MenuBar layoutY="-2.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="35.0" prefWidth="377.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
         <menus>
@@ -26,122 +27,142 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TabPane layoutY="29.0" prefHeight="356.0" prefWidth="564.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
+      <TabPane layoutY="29.0" prefHeight="320.0" prefWidth="564.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
         <tabs>
-          <Tab closable="false" text="Untitled Tab 1">
+          <Tab fx:id="int_tab" closable="false" text="Интегралы">
                <content>
-                  <AnchorPane id="AnchorPane" prefHeight="171.0" prefWidth="377.0" styleClass="mainFxmlClass">
-                      <stylesheets>
-                          <URL value="@../css/mainwin.css" />
-                      </stylesheets>
+                  <HBox alignment="CENTER" layoutX="5.0" layoutY="20.0">
                      <children>
-                        <GridPane layoutX="14.0" layoutY="99.0" prefHeight="273.0" prefWidth="552.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="20.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="456.0" minWidth="10.0" prefWidth="404.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
+                        <VBox alignment="CENTER" layoutX="5.0" layoutY="20.0">
                            <children>
-                              <Label prefHeight="88.0" prefWidth="20.0" text="∫" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font size="70.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </GridPane.margin>
-                              </Label>
-                              <TextField fx:id="field_a" focusTraversable="false" prefHeight="31.0" prefWidth="118.0" promptText="b">
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </GridPane.margin>
-                              </TextField>
-                              <TextField fx:id="field_b" focusTraversable="false" prefWidth="64.0" promptText="a" GridPane.rowIndex="2">
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </GridPane.margin>
-                              </TextField>
-                              <TextField fx:id="field_form" prefHeight="31.0" prefWidth="232.0" promptText="f(x)" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </GridPane.margin>
-                              </TextField>
-                              <Button fx:id="btn_enter" mnemonicParsing="false" onAction="#show_result" prefHeight="32.0" prefWidth="70.0" text="Ввод" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </GridPane.margin>
-                              </Button>
-                              <GridPane GridPane.columnIndex="1">
+                              <GridPane layoutX="5.0" layoutY="20.0" prefHeight="273.0" prefWidth="552.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="20.0">
                                 <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="267.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="400.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="115.0" minWidth="80.0" prefWidth="101.0" />
                                 </columnConstraints>
                                 <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="90.0" minHeight="90.0" prefHeight="90.0" vgrow="SOMETIMES" />
+                                  <RowConstraints fillHeight="false" maxHeight="200.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                                  <RowConstraints fillHeight="false" maxHeight="90.0" minHeight="90.0" prefHeight="90.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Slider fx:id="sl_N" max="1000.0" min="2.0" prefHeight="18.0" prefWidth="200.0" value="100.0" GridPane.columnIndex="1" />
-                                    <Label prefHeight="21.0" prefWidth="14.0" text="N" />
-                                    <Slider fx:id="sl_eps" max="10.0" prefHeight="18.0" prefWidth="200.0" value="2.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label prefHeight="21.0" prefWidth="28.0" text="Eps" GridPane.rowIndex="1" />
-                                 </children>
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </GridPane>
-                              <GridPane GridPane.columnIndex="2">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Label fx:id="lb_valueEps" prefHeight="21.0" prefWidth="38.0" GridPane.rowIndex="1">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" />
-                                       </HBox.margin>
+                                    <Label prefHeight="88.0" prefWidth="20.0" text="∫" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="70.0" />
+                                       </font>
                                        <GridPane.margin>
-                                          <Insets bottom="10.0" left="15.0" />
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                    <TextField fx:id="int_field_a" focusTraversable="false" prefHeight="31.0" prefWidth="118.0" promptText="b">
+                                       <GridPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </GridPane.margin>
+                                    </TextField>
+                                    <TextField fx:id="int_field_b" focusTraversable="false" prefWidth="64.0" promptText="a" GridPane.rowIndex="2">
+                                       <GridPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </GridPane.margin>
+                                    </TextField>
+                                    <TextField fx:id="int_field_form" prefHeight="31.0" prefWidth="232.0" promptText="f(x)" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </GridPane.margin>
+                                    </TextField>
+                                    <Button fx:id="int_btn_enter" mnemonicParsing="false" onAction="#show_result" prefHeight="32.0" prefWidth="70.0" text="Ввод" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </GridPane.margin>
+                                    </Button>
+                                    <GridPane GridPane.columnIndex="1">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="267.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
                                        <children>
-                                          <AnchorPane prefHeight="46.0" prefWidth="70.0">
-                                             <children>
-                                                <TextField fx:id="tx_valueN" layoutX="3.0" layoutY="8.0" prefHeight="31.0" prefWidth="59.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="7.0" />
-                                                <Label fx:id="lb_valueN" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-                                             </children>
-                                          </AnchorPane>
+                                          <Slider fx:id="int_sl_N" max="1000.0" min="2.0" prefHeight="18.0" prefWidth="200.0" value="100.0" GridPane.columnIndex="1" />
+                                          <Label prefHeight="21.0" prefWidth="14.0" text="N" />
+                                          <Slider fx:id="int_sl_eps" max="10.0" prefHeight="18.0" prefWidth="200.0" value="2.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label prefHeight="21.0" prefWidth="28.0" text="Eps" GridPane.rowIndex="1" />
                                        </children>
-                                    </HBox>
+                                       <GridPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </GridPane.margin>
+                                    </GridPane>
+                                    <GridPane GridPane.columnIndex="2">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label fx:id="int_lb_valueEps" prefHeight="21.0" prefWidth="38.0" GridPane.rowIndex="1">
+                                             <HBox.margin>
+                                                <Insets bottom="10.0" />
+                                             </HBox.margin>
+                                             <GridPane.margin>
+                                                <Insets bottom="10.0" left="15.0" />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <AnchorPane prefHeight="46.0" prefWidth="70.0">
+                                                   <children>
+                                                      <TextField fx:id="int_tx_valueN" layoutX="3.0" layoutY="8.0" prefHeight="31.0" prefWidth="59.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="7.0" />
+                                                      <Label fx:id="int_lb_valueN" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </GridPane>
                                  </children>
                               </GridPane>
                            </children>
-                        </GridPane>
+                        </VBox>
                      </children>
-                  </AnchorPane>
+                  </HBox>
                </content>
           </Tab>
-          <Tab closable="false" text="Untitled Tab 2">
+          <Tab fx:id="diff_tab" closable="false" text="Диффуры">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane fx:id="diff_ach" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextField layoutX="14.0" layoutY="167.0" prefHeight="31.0" prefWidth="304.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" />
-                        <LineChart layoutX="4.0" layoutY="-200.0" prefHeight="151.0" prefWidth="497.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis side="LEFT" />
-                          </yAxis>
-                        </LineChart>
+                        <Label layoutX="5.0" layoutY="276.0" prefHeight="30.0" prefWidth="34.0" text="y' =" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="diff_form" layoutX="43.0" layoutY="275.0" prefHeight="32.0" prefWidth="287.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="235.0" />
+                        <HBox layoutX="324.0" layoutY="277.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="356.0" layoutY="283.0" prefHeight="30.0" prefWidth="25.0" text="y(">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="diff_x0" layoutX="380.0" layoutY="283.0" prefHeight="32.0" prefWidth="50.0" promptText="x0" />
+                              <Label alignment="CENTER" layoutX="413.0" layoutY="247.0" prefHeight="30.0" prefWidth="34.0" text=") =">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="diff_y0" layoutX="441.0" layoutY="277.0" prefHeight="32.0" prefWidth="50.0" promptText="y0" />
+                              <Separator halignment="RIGHT" orientation="VERTICAL" prefHeight="32.0" prefWidth="7.0">
+                                 <HBox.margin>
+                                    <Insets left="6.0" right="4.0" />
+                                 </HBox.margin>
+                              </Separator>
+                              <TextField fx:id="diff_end" layoutX="506.0" layoutY="277.0" prefHeight="32.0" prefWidth="50.0" promptText="end" />
+                           </children>
+                        </HBox>
                      </children>
                   </AnchorPane>
             </content>
