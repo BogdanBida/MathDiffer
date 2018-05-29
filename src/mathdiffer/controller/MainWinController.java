@@ -28,6 +28,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import mathdiffer.Calculation;
+import mathdiffer.DifferCalc;
 import mathdiffer.MathDiffer;
 
 public class MainWinController implements Initializable {
@@ -79,6 +80,8 @@ public class MainWinController implements Initializable {
 
     @FXML
     private TextField diff_end;
+    
+    @FXML TextField diff_h;
 
     NumberAxis diff_chart_xAxis = new NumberAxis();
     NumberAxis diff_chart_yAxis = new NumberAxis();
@@ -147,20 +150,32 @@ public class MainWinController implements Initializable {
         AnchorPane.setLeftAnchor(diff_chart, 5.0);
         AnchorPane.setRightAnchor(diff_chart, 5.0);
         AnchorPane.setBottomAnchor(diff_chart, 35.0);
-        
-        Random r = new Random();
-        double[][] array = new double[10][2];
-        
-        for (double[] array1 : array) {
-            for (int j = 0; j < array1.length; j++) {
-                array1[j] = r.nextInt(20) + 30.0;
+
+        diff_form.setOnKeyPressed((event) -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                getCommandDiffer();
             }
-        }
-        
-        buildLine(array);
+        });
     }
 
-    private void buildLine(double[][] list) {
+    public void getCommandDiffer() {
+        double[][] array;
+        String form = diff_form.getText();
+        try {
+            double x0 = Calculation.eval(Calculation.processingStr(diff_x0.getText()));
+            double y0 = Calculation.eval(Calculation.processingStr(diff_y0.getText()));
+            double end = Calculation.eval(Calculation.processingStr(diff_end.getText()));
+            double h = Calculation.eval(Calculation.processingStr(diff_h.getText()));
+            array = DifferCalc.get(form, x0, end, y0, h);
+            buildLine(array, form);
+        } catch (ArithmeticException expt) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Ошибка");
+            alert.show();
+        }
+    }
+
+    private void buildLine(double[][] list, String form) {
         XYChart.Series<Double, Double> line = new XYChart.Series<>();
 
         double lowerX = 10000;
@@ -168,32 +183,32 @@ public class MainWinController implements Initializable {
         double lowerY = 10000;
         double upperY = -10000;
 
-        for (double[] arr : list) {
-            if (arr[0] < lowerX) {
-                lowerX = arr[0];
-            }
-            if (arr[0] > upperX) {
-                upperX = arr[0];
-            }
-            if (arr[1] < lowerY) {
-                lowerY = arr[1];
-            }
-            if (arr[1] > upperY) {
-                upperY = arr[1];
-            }
-            line.getData().add(new XYChart.Data<>(arr[0], arr[1]));
+        for (int i = 0; i < list[0].length; i++) {
+//            if (arr[0] < lowerX) {
+//                lowerX = arr[0];
+//            }
+//            if (arr[0] > upperX) {
+//                upperX = arr[0];
+//            }
+//            if (arr[1] < lowerY) {
+//                lowerY = arr[1];
+//            }
+//            if (arr[1] > upperY) {
+//                upperY = arr[1];
+//            }
+            line.getData().add(new XYChart.Data<>(list[0][i], list[1][i]));
         }
         diff_chart_yAxis.setUpperBound(upperY);
         diff_chart_yAxis.setLowerBound(lowerY);
 
         diff_chart_xAxis.setUpperBound(upperX);
         diff_chart_xAxis.setLowerBound(lowerY);
-        
+
         diff_chart_xAxis.setForceZeroInRange(false);
         diff_chart_yAxis.setForceZeroInRange(false);
-        
-        line.setName("Test");
-        diff_chart.getData().add(line);
+
+        line.setName("(" + form + ")'");
+        diff_chart.getData().setAll(line);
     }
 
     private double searchLowerNum(double[] arr) {
@@ -260,7 +275,7 @@ public class MainWinController implements Initializable {
                 + "\tБогдан Бида(bogdanbida.ua@gmail.com),\n"
                 + "\tЭдуард Белоусов(edikbelousov@gmail.com)\n"
                 + "\nПрограмма написана на JavaFX 8" + "\n"
-                + "\t08.04.2018");
+                + "\t29.05.2018");
         alert.showAndWait();
     }
 

@@ -18,11 +18,6 @@
                   <WebView fx:id="int_webView" prefHeight="-1.0" prefWidth="-1.0" />
                </content>
             </Tab>
-            <Tab fx:id="diff_tab" closable="false" text="Диффуры">
-               <content>
-                  <WebView fx:id="diff_webView" prefHeight="200.0" prefWidth="200.0" />
-               </content>
-            </Tab>
          </tabs>
       </TabPane>
    </children>

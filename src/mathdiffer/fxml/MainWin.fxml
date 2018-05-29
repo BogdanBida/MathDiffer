@@ -140,7 +140,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="diff_form" layoutX="43.0" layoutY="275.0" prefHeight="32.0" prefWidth="287.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="235.0" />
+                        <TextField fx:id="diff_form" layoutX="43.0" layoutY="275.0" prefHeight="32.0" prefWidth="259.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="297.0" />
                         <HBox layoutX="324.0" layoutY="277.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
                            <children>
                               <Label alignment="CENTER" layoutX="356.0" layoutY="283.0" prefHeight="30.0" prefWidth="25.0" text="y(">
@@ -161,6 +161,11 @@
                                  </HBox.margin>
                               </Separator>
                               <TextField fx:id="diff_end" layoutX="506.0" layoutY="277.0" prefHeight="32.0" prefWidth="50.0" promptText="end" />
+                              <TextField fx:id="diff_h" prefHeight="32.0" prefWidth="50.0" promptText="h">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </TextField>
                            </children>
                         </HBox>
                      </children>
