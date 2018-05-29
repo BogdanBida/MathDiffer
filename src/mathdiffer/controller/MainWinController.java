@@ -2,6 +2,7 @@ package mathdiffer.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -146,17 +147,71 @@ public class MainWinController implements Initializable {
         AnchorPane.setLeftAnchor(diff_chart, 5.0);
         AnchorPane.setRightAnchor(diff_chart, 5.0);
         AnchorPane.setBottomAnchor(diff_chart, 35.0);
+        
+        Random r = new Random();
+        double[][] array = new double[10][2];
+        
+        for (double[] array1 : array) {
+            for (int j = 0; j < array1.length; j++) {
+                array1[j] = r.nextInt(20) + 30.0;
+            }
+        }
+        
+        buildLine(array);
     }
 
-    private void buildLine(Double[][] list) {
+    private void buildLine(double[][] list) {
         XYChart.Series<Double, Double> line = new XYChart.Series<>();
 
-        for (Double[] arr : list) {
+        double lowerX = 10000;
+        double upperX = -10000;
+        double lowerY = 10000;
+        double upperY = -10000;
+
+        for (double[] arr : list) {
+            if (arr[0] < lowerX) {
+                lowerX = arr[0];
+            }
+            if (arr[0] > upperX) {
+                upperX = arr[0];
+            }
+            if (arr[1] < lowerY) {
+                lowerY = arr[1];
+            }
+            if (arr[1] > upperY) {
+                upperY = arr[1];
+            }
             line.getData().add(new XYChart.Data<>(arr[0], arr[1]));
         }
+        diff_chart_yAxis.setUpperBound(upperY);
+        diff_chart_yAxis.setLowerBound(lowerY);
 
+        diff_chart_xAxis.setUpperBound(upperX);
+        diff_chart_xAxis.setLowerBound(lowerY);
+        
+        diff_chart_xAxis.setForceZeroInRange(false);
+        diff_chart_yAxis.setForceZeroInRange(false);
+        
         line.setName("Test");
         diff_chart.getData().add(line);
+    }
+
+    private double searchLowerNum(double[] arr) {
+        double res = arr[0];
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < res) {
+
+            } else {
+
+            }
+        }
+
+        return res;
+    }
+
+    private double searchUpperNum() {
+        return 0;
     }
 
     @FXML
@@ -202,12 +257,10 @@ public class MainWinController implements Initializable {
         alert.setHeaderText("");
         alert.setContentText("Авторы: \n"
                 + "\tСтуденты ХНЭУ им. С. Кузнеца\n"
-                + "\tБогдан Бида, Эдуард Белоусов\n"
-                + "\t(bogdanbida.ua@gmail.com),(edikbelousov@gmail.com)\n"
-                + "\t" + "intSolver" + "\n"
-                + "\tПрограмма написана на JavaFX 8" + "\n"
+                + "\tБогдан Бида(bogdanbida.ua@gmail.com),\n"
+                + "\tЭдуард Белоусов(edikbelousov@gmail.com)\n"
+                + "\nПрограмма написана на JavaFX 8" + "\n"
                 + "\t08.04.2018");
-
         alert.showAndWait();
     }
 
